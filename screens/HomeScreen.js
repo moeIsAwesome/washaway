@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  Pressable,
+  Image,
+} from 'react-native';
 import * as Location from 'expo-location';
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const HomeScreen = () => {
   const [displayCurrentLocation, setDisplayCurrentLocation] = useState(
@@ -46,21 +56,18 @@ const HomeScreen = () => {
     }
 
     let { coords } = await Location.getCurrentPositionAsync();
-    console.log(coords);
     if (coords) {
       const { latitude, longitude } = coords;
       let response = await Location.reverseGeocodeAsync({
         latitude,
         longitude,
       });
-      console.log('response from LOCATION', response);
 
       //==> Response from location would be an array of objects, basically it should be an array with only one element, but there might be multiple addresses for the same location, so we are looping through the array and updating the address with the last element of the array.
 
       for (let item of response) {
         let address = `${item.country}, ${item.name}, ${item.city}, `;
         setDisplayCurrentLocation(address);
-        console.log(address, 'address');
       }
     }
   };
@@ -72,7 +79,23 @@ const HomeScreen = () => {
   });
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.text}>{displayCurrentLocation}</Text>
+      {Platform.OS === 'ios' ? (
+        <Ionicons name="ios-location" size={24} color="black" />
+      ) : (
+        <MaterialIcons name="location-on" size={24} color="black" />
+      )}
+      <View>
+        <Text style={styles.addressTitle}>Home</Text>
+        <Text style={styles.addressText}>{displayCurrentLocation}</Text>
+      </View>
+      <Pressable style={{ marginLeft: 'auto', marginRight: 7 }}>
+        <Image
+          style={styles.image}
+          source={{
+            uri: 'https://lh3.googleusercontent.com/ogw/AAEL6shMEiPwvrpjjN6RoNW68FfIJ9QqiU7Anl1H7d3b=s64-c-mo',
+          }}
+        />
+      </Pressable>
     </View>
   );
 };
@@ -81,10 +104,21 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
   },
-  text: {
-    fontSize: 20,
-    color: 'red',
+  addressTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  addressText: {
+    fontSize: 12,
+    color: 'black',
+  },
+  image: {
+    width: 40,
+    height: 40,
+    borderRadius: 25,
   },
 });
