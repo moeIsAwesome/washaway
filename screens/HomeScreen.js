@@ -7,10 +7,13 @@ import {
   Platform,
   Pressable,
   Image,
+  TextInput,
 } from 'react-native';
 import * as Location from 'expo-location';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import Carousel from '../components/Carousel';
+import Services from '../components/Services';
 
 const HomeScreen = () => {
   const [displayCurrentLocation, setDisplayCurrentLocation] = useState(
@@ -78,24 +81,43 @@ const HomeScreen = () => {
     getCurrentLocation();
   });
   return (
-    <View style={styles.wrapper}>
-      {Platform.OS === 'ios' ? (
-        <Ionicons name="ios-location" size={24} color="black" />
-      ) : (
-        <MaterialIcons name="location-on" size={24} color="black" />
-      )}
-      <View>
-        <Text style={styles.addressTitle}>Home</Text>
-        <Text style={styles.addressText}>{displayCurrentLocation}</Text>
+    <View style={{ backgroundColor: '#f0f0f0', flex: '1' }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
+        {Platform.OS === 'ios' ? (
+          <Ionicons name="ios-location" size={24} color="orange" />
+        ) : (
+          <MaterialIcons name="location-on" size={24} color="orange" />
+        )}
+        <View>
+          <Text style={styles.addressTitle}>Home</Text>
+          <Text style={styles.addressText}>{displayCurrentLocation}</Text>
+        </View>
+        <Pressable style={{ marginLeft: 'auto', marginRight: 7 }}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: 'https://lh3.googleusercontent.com/ogw/AAEL6shMEiPwvrpjjN6RoNW68FfIJ9QqiU7Anl1H7d3b=s64-c-mo',
+            }}
+          />
+        </Pressable>
       </View>
-      <Pressable style={{ marginLeft: 'auto', marginRight: 7 }}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: 'https://lh3.googleusercontent.com/ogw/AAEL6shMEiPwvrpjjN6RoNW68FfIJ9QqiU7Anl1H7d3b=s64-c-mo',
-          }}
-        />
-      </Pressable>
+      <View
+        style={{
+          padding: 10,
+          margin: 10,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          borderWidth: 0.8,
+          borderColor: 'lightgrey',
+          borderRadius: 10,
+        }}
+      >
+        <TextInput placeholder="Search for items..." />
+        <Ionicons name="md-search" size={24} color="orange" />
+      </View>
+      <Carousel />
+      <Services />
     </View>
   );
 };
@@ -103,11 +125,6 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-  },
   addressTitle: {
     fontSize: 18,
     fontWeight: 'bold',
