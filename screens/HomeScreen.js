@@ -81,7 +81,7 @@ const HomeScreen = () => {
     getCurrentLocation();
   });
   return (
-    <View style={{ backgroundColor: '#f0f0f0', flex: '1' }}>
+    <View style={{ backgroundColor: '#f0f0f0', flex: 1 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
         {Platform.OS === 'ios' ? (
           <Ionicons name="ios-location" size={24} color="orange" />

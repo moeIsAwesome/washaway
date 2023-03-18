@@ -32,11 +32,21 @@ const Services = () => {
   ];
   return (
     <View style={{ padding: 10 }}>
-      <Text>Services available:</Text>
+      <Text style={{ fontSize: 16, fontWeight: '500', marginBottom: 7 }}>
+        Services available:
+      </Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {services.map((service) => {
           return (
-            <Pressable style={{ margin: 10 }} key={service.id}>
+            <Pressable
+              style={{
+                margin: 5,
+                backgroundColor: 'white',
+                padding: 20,
+                borderRadius: 10,
+              }}
+              key={service.id}
+            >
               <Image
                 source={{ uri: service.image }}
                 style={{
@@ -45,7 +55,9 @@ const Services = () => {
                   resizeMode: 'contain',
                 }}
               />
-              <Text>{service.name}</Text>
+              <Text style={{ textAlign: 'center', marginTop: 10 }}>
+                {service.name}
+              </Text>
             </Pressable>
           );
         })}
