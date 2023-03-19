@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  SafeAreaView,
+  ScrollView,
   View,
   Text,
   StyleSheet,
@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import Carousel from '../components/Carousel';
 import Services from '../components/Services';
+import DressItem from '../components/DressItem';
 
 const HomeScreen = () => {
   const [displayCurrentLocation, setDisplayCurrentLocation] = useState(
@@ -80,8 +81,61 @@ const HomeScreen = () => {
     checkIfLocationIsEnabled();
     getCurrentLocation();
   });
+
+  // products data
+  const services = [
+    {
+      id: '0',
+      image: 'https://cdn-icons-png.flaticon.com/128/4643/4643574.png',
+      name: 'shirt',
+      quantity: 0,
+      price: 10,
+    },
+    {
+      id: '11',
+      image: 'https://cdn-icons-png.flaticon.com/128/892/892458.png',
+      name: 'T-shirt',
+      quantity: 0,
+      price: 10,
+    },
+    {
+      id: '12',
+      image: 'https://cdn-icons-png.flaticon.com/128/9609/9609161.png',
+      name: 'dresses',
+      quantity: 0,
+      price: 10,
+    },
+    {
+      id: '13',
+      image: 'https://cdn-icons-png.flaticon.com/128/599/599388.png',
+      name: 'jeans',
+      quantity: 0,
+      price: 10,
+    },
+    {
+      id: '14',
+      image: 'https://cdn-icons-png.flaticon.com/128/9431/9431166.png',
+      name: 'Sweater',
+      quantity: 0,
+      price: 10,
+    },
+    {
+      id: '15',
+      image: 'https://cdn-icons-png.flaticon.com/128/3345/3345397.png',
+      name: 'shorts',
+      quantity: 0,
+      price: 10,
+    },
+    {
+      id: '16',
+      image: 'https://cdn-icons-png.flaticon.com/128/293/293241.png',
+      name: 'Sleeveless',
+      quantity: 0,
+      price: 10,
+    },
+  ];
   return (
-    <View style={{ backgroundColor: '#f0f0f0', flex: 1 }}>
+    <ScrollView style={{ backgroundColor: '#f0f0f0', flex: 1 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
         {Platform.OS === 'ios' ? (
           <Ionicons name="ios-location" size={24} color="orange" />
@@ -113,12 +167,15 @@ const HomeScreen = () => {
           borderRadius: 10,
         }}
       >
-        <TextInput placeholder="Search for items..." />
+        <TextInput placeholder="Search for items..." keyboardType="numeric" />
         <Ionicons name="md-search" size={24} color="orange" />
       </View>
       <Carousel />
       <Services />
-    </View>
+      {services.map((item) => (
+        <DressItem key={item.id} item={item} />
+      ))}
+    </ScrollView>
   );
 };
 
