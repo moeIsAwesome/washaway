@@ -1,3 +1,4 @@
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -6,9 +7,11 @@ import PickUpScreen from './screens/PickUpScreen';
 import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
-const Stack = createNativeStackNavigator();
+import ProfileScreen from './screens/ProfileScreen';
+import OrderScreen from './screens/OrderScreen';
 
 const StackNavigator = () => {
+  const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -17,7 +20,6 @@ const StackNavigator = () => {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
-
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -38,9 +40,21 @@ const StackNavigator = () => {
           component={RegisterScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Order"
+          component={OrderScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
 export default StackNavigator;
+
+const styles = StyleSheet.create({});
