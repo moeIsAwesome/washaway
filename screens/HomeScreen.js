@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   ScrollView,
   View,
@@ -15,8 +16,14 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Carousel from '../components/Carousel';
 import Services from '../components/Services';
 import DressItem from '../components/DressItem';
+import { getProducts } from '../ProductReducer';
 
 const HomeScreen = () => {
+  const cart = useSelector((state) => state.cart.cart);
+  const total = cart
+    .map((item) => item.quantity * item.price)
+    .reduce((curr, prev) => curr + prev, 0);
+
   const [displayCurrentLocation, setDisplayCurrentLocation] = useState(
     'Loading your location...'
   );
@@ -82,6 +89,17 @@ const HomeScreen = () => {
     getCurrentLocation();
   });
 
+  const product = useSelector((state) => state.product.product);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (product.length > 0) return;
+    const fetchProducts = () => {
+      services.map((service) => dispatch(getProducts(service)));
+    };
+    fetchProducts();
+  }, []);
+
   // products data
   const services = [
     {
@@ -135,47 +153,87 @@ const HomeScreen = () => {
     },
   ];
   return (
-    <ScrollView style={{ backgroundColor: '#f0f0f0', flex: 1 }}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
-        {Platform.OS === 'ios' ? (
-          <Ionicons name="ios-location" size={24} color="orange" />
-        ) : (
-          <MaterialIcons name="location-on" size={24} color="orange" />
-        )}
-        <View>
-          <Text style={styles.addressTitle}>Home</Text>
-          <Text style={styles.addressText}>{displayCurrentLocation}</Text>
+    <>
+      <ScrollView style={{ backgroundColor: '#f0f0f0', flex: 1 }}>
+        <View
+          style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}
+        >
+          {Platform.OS === 'ios' ? (
+            <Ionicons name="ios-location" size={24} color="orange" />
+          ) : (
+            <MaterialIcons name="location-on" size={24} color="orange" />
+          )}
+          <View>
+            <Text style={styles.addressTitle}>Home</Text>
+            <Text style={styles.addressText}>{displayCurrentLocation}</Text>
+          </View>
+          <Pressable style={{ marginLeft: 'auto', marginRight: 7 }}>
+            <Image
+              style={styles.image}
+              source={{
+                uri: 'https://lh3.googleusercontent.com/ogw/AAEL6shMEiPwvrpjjN6RoNW68FfIJ9QqiU7Anl1H7d3b=s64-c-mo',
+              }}
+            />
+          </Pressable>
         </View>
-        <Pressable style={{ marginLeft: 'auto', marginRight: 7 }}>
-          <Image
-            style={styles.image}
-            source={{
-              uri: 'https://lh3.googleusercontent.com/ogw/AAEL6shMEiPwvrpjjN6RoNW68FfIJ9QqiU7Anl1H7d3b=s64-c-mo',
-            }}
-          />
+        <View
+          style={{
+            padding: 10,
+            margin: 10,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            borderWidth: 0.8,
+            borderColor: 'lightgrey',
+            borderRadius: 10,
+          }}
+        >
+          <TextInput placeholder="Search for items..." keyboardType="numeric" />
+          <Ionicons name="md-search" size={24} color="orange" />
+        </View>
+        <Carousel />
+        <Services />
+        {product.map((item) => (
+          <DressItem key={item.id} item={item} />
+        ))}
+      </ScrollView>
+
+      {total === 0 ? null : (
+        <Pressable
+          style={{
+            backgroundColor: '#088f8f',
+            padding: 18,
+            marginBottom: 30,
+            margin: 15,
+            borderRadius: 10,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <View>
+            <Text style={{ fontSize: 17, fontWeight: 600, color: 'white' }}>
+              {cart.length} items | ${total}
+            </Text>
+            <Text
+              style={{
+                fontSize: 14,
+                fontWeight: 300,
+                color: 'white',
+                marginVertical: 5,
+              }}
+            >
+              Extra charges might apply
+            </Text>
+          </View>
+          <Pressable>
+            <Text style={{ fontSize: 17, fontWeight: 600, color: 'white' }}>
+              Proceed to pickup
+            </Text>
+          </Pressable>
         </Pressable>
-      </View>
-      <View
-        style={{
-          padding: 10,
-          margin: 10,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderWidth: 0.8,
-          borderColor: 'lightgrey',
-          borderRadius: 10,
-        }}
-      >
-        <TextInput placeholder="Search for items..." keyboardType="numeric" />
-        <Ionicons name="md-search" size={24} color="orange" />
-      </View>
-      <Carousel />
-      <Services />
-      {services.map((item) => (
-        <DressItem key={item.id} item={item} />
-      ))}
-    </ScrollView>
+      )}
+    </>
   );
 };
 
