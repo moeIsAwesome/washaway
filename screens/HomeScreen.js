@@ -17,9 +17,11 @@ import Carousel from '../components/Carousel';
 import Services from '../components/Services';
 import DressItem from '../components/DressItem';
 import { getProducts } from '../ProductReducer';
+import { useNavigation } from '@react-navigation/core';
 
 const HomeScreen = () => {
   const cart = useSelector((state) => state.cart.cart);
+  const navigation = useNavigation();
   const total = cart
     .map((item) => item.quantity * item.price)
     .reduce((curr, prev) => curr + prev, 0);
@@ -226,7 +228,11 @@ const HomeScreen = () => {
               Extra charges might apply
             </Text>
           </View>
-          <Pressable>
+          <Pressable
+            onPress={() => {
+              navigation.navigate('Pickup');
+            }}
+          >
             <Text style={{ fontSize: 17, fontWeight: 600, color: 'white' }}>
               Proceed to pickup
             </Text>
