@@ -7,21 +7,15 @@
 ### Leave your laundry worries behind with WashAway!
 
 
-A modern and fully functional web application that enables admins to define discount codes with desired percentages and customers to apply the codes to their purchases.
+WashAway is an innovative full-stack laundry management application built using React Native, Firebase, and Redux. With its intuitive and user-friendly interface, WashAway offers a seamless laundry experience for both residential and commercial users.
 
-Built using React and TailwindCSS, Discountify utilizes modern syntaxes and follows the latest trends in web development. The app integrates MongoDB and Mongoose for the database, and Express for the backend server. It also includes React Icons for an enhanced UI experience
-
-https://good-cyan-barnacle.cyclic.app/
-
-Discountify provides seamless CRUD functionality and displays data from the database in real-time. So, this is a real CRUD! not just some changes in the UI!
 
 
 **What tools were used in this project?**
-* NodeJS
-* Express
-* MongoDB
-* Mongoose
-* React JS
+
+* React Native: for building the mobile application for both iOS and Android platforms
+* Firebase: for backend infrastructure, authentication, and real-time database management
+* Redux: for state management and easy data flow across the application
 
 <div align="center">
   <img height="60" src="https://lh3.googleusercontent.com/fife/AAWUweVapUrgtdB2p-TNRqRB8QutN3pF80iz_FkqZvIZD1GQT7O_ZpbNLTJYsR_7SOz5WFkGatYnCp1l6HBT5f-c3ppHmVFiWr-WYSoszN8B-cbIaPNCHbxP57HDqHj1ptExU1lBXOyjJ2BUmXnp1aZCoLISlk3Lx-tEKCAGkYm7WKwK3zN1jUs_203Yu46yUHg14pvHTx3n4dwXIG9PYB76h8tEQZ3kWuKwXpfd9yunTu56jj-CjZEYeiJ9SaBUhQ1s5XoTbqyc7pvxGWb66vv2D-k5QuxlI34-9easfwiCtvVG0hvJpCHR7UPF5puS_uDRpFVWDebfFh0J69BaQZeblqTXdJoz8UaJVzV0C0QO-BnYtWSDrqTGMuZN_gbxIjTi4_lK9ebWBDcwXRwsmVrd2EMf56kUq-jPi6Wwvi5tmO2wL7UvCXfU2tLcmVX0dfYgsVmhmLL_bbeCWa6hHitf9GLy8mcbZ0XVIxCgU_d1mt_wYyunQ0rAPGzgFCZWwz8gm6MV80gvuRSn2jDyqLxSU80Riqoq_kAUJzmOHAFOs5SUgSpkJvI3i52r-f2uELgQhwfIBK0L8Ut5UJPzvrHR66VlwmXEf1je8QlEythEnPtLO-2oA6yjJ1pNgESrxPnjohu56xFCwjzaRICeoFQn-AiotRpVGVj0S_JkHppjh32dEb3MxTlChRsTwbZV93XQlZEbkDw6-9vtLJurbmDImujFzH_mZeOFhSo=w1920-h937">
